@@ -1,0 +1,74 @@
+#layout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+    position :relative;
+}
+
+#remote-tracks {
+    transition: all 0.5 ease;
+    cursor: pointer;
+    left : 0;
+    top : 0;
+}
+
+#local-track {
+    transition : all 0.5 ease;
+    cursor: pointer;
+    right: 0;
+    top : 0;
+}
+
+.full-size {
+    width: 100%;
+    height: 100%;
+}
+
+.half-size {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+
+}
+
+.small-size {
+    position : absolute;
+
+    width: 20%;
+    height: 20%;
+}
+
+
+@media screen and (max-width: 768px) {
+    #layout-container {
+        padding : 10px;
+    }
+
+    .half-size {
+        width: 100%;
+        height: 50%;
+    }
+
+    .small-size {
+        width: 30%;
+        height: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #layout-container {
+        padding : 5px;
+    }
+
+    .half-size {
+        width: 100%;
+        height: 50%;
+    }
+
+    .small-size {
+        width: 40%;
+        height: 40%;
+    }
+}

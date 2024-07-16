@@ -24,7 +24,7 @@ function VideoComponent({ track, participantIdentity, local = false }: VideoComp
     return (
         <div id={"camera-" + participantIdentity} className="video-container">
             <div className="participant-data">
-                <p>{participantIdentity + (local ? " (나)" : "")}</p>
+                <p style={{backgroundColor : local ? "blue" : "f8f8f8" }}>{participantIdentity}</p>
             </div>
             <video ref={videoElement} id={track.sid}></video>
         </div>

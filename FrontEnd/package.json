@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "livekit-client": "^2.1.5",
+    "@livekit/components-react": "^2.3.6",
+    "@livekit/components-styles": "^1.0.12",
+    "express": "^4.19.2",
+    "livekit-client": "^2.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
