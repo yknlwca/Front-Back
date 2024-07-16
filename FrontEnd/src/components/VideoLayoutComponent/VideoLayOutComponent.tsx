@@ -1,9 +1,9 @@
 import React from 'react';
-import { TrackInfo } from '../WebRTCComponent/WebRTCComponent';
+import { TrackInfo } from '../../hooks/useWebRTC'; 
 import VideoComponent from '../VideoComponent/VideoComponent';
 import AudioComponent from '../AudioComponent/AudioComponent';
 import { LocalVideoTrack } from 'livekit-client';
-import './VideoLayOutComponent.css';
+import './VideoLayoutComponent.css';
 
 interface VideoLayoutComponentProps {
     localTrack: LocalVideoTrack | undefined;

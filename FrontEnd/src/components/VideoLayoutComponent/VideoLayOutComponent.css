@@ -3,8 +3,10 @@
     justify-content: center;
     align-items: center;
     width: 80%;
-    height: 30%;
+    height: 100%;
     position :relative;
+    /* 채팅창 공간 남겨두기 */
+    margin-right:300px;
 }
 
 #remote-tracks {
@@ -35,7 +37,6 @@
 
 .small-size {
     position : absolute;
-
     width: 20%;
     height: 20%;
 }
@@ -44,6 +45,8 @@
 @media screen and (max-width: 768px) {
     #layout-container {
         padding : 10px;
+        /* 채팅창 공간 지우기 */
+        margin-right:0;
     }
 
     .half-size {
@@ -60,6 +63,7 @@
 @media screen and (max-width: 480px) {
     #layout-container {
         padding : 5px;
+        margin-right: 0;
     }
 
     .half-size {

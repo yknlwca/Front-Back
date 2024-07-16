@@ -1,44 +1,63 @@
 import React, { useState } from 'react';
+import { useChat, ChatMessage } from '../../hooks/useChat';
+import { ChatEntry } from '@livekit/components-react';
 import './ChatComponent.css';
-import '@livekit/components-styles';
 
 interface ChatComponentProps {
-    localParticipant: RemoteParticipant;
-    messages: { user: string; text: string }[];
-    onSendMessage: (message: { user: string; text: string }) => void;
+  room: Room | undefined;
 }
 
-const ChatComponent: React.FC<ChatComponentProps> = ({ localParticipant, messages, onSendMessage }) => {
-    const [input, setInput] = useState<string>('');
+const ChatComponent: React.FC<ChatComponentProps> = ({ room }) => {
+  const { messages, sendMessage, isDataChannelReady } = useChat(room);
+  const [message, setMessage] = useState("");
 
-    const handleSend = () => {
-        if (input.trim()) {
-            const message = { user: localParticipant.identity, text: input };
-            onSendMessage(message);
-            setInput('');
-        }
-    };
+  const handleSendMessage = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (message.trim() !== "" && isDataChannelReady) {
+      await sendMessage(message);
+      setMessage("");
+    }
+  };
 
-    return (
-        <div className="chat-container">
-            <div className="chat-messages">
-                {messages.map((msg, index) => (
-                    <div key={index} className="chat-message">
-                        <strong>{msg.user}:</strong> {msg.text}
-                    </div>
-                ))}
-            </div>
-            <div className="chat-input">
-                <input
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                />
-                <button onClick={handleSend}>Send</button>
-            </div>
-        </div>
-    );
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(event.target.value);
+  };
+
+  const handleKeyPress = async (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      await handleSendMessage(event);
+    }
+  };
+
+  return (
+    <div className="chat-container">
+      <ul className="chat-messages">
+        {messages.map((msg: ChatMessage, idx: number) => (
+          <ChatEntry
+            key={idx}
+            entry={{
+              id: msg.id,
+              message: msg.message,
+              from: { identity: msg.from, name: msg.from },
+              timestamp: msg.timestamp,
+            }}
+          />
+        ))}
+      </ul>
+      <form className="chat-input" onSubmit={handleSendMessage}>
+        <input
+          type="text"
+          value={message}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+          placeholder="Enter your message"
+          disabled={!isDataChannelReady}
+        />
+        <button type="submit" disabled={!isDataChannelReady}>Send</button>
+      </form>
+    </div>
+  );
 };
 
 export default ChatComponent;

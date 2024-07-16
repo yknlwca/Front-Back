@@ -1,7 +1,6 @@
 import React from 'react';
 import { LocalVideoTrack } from 'livekit-client';
 import './ControlPanelComponent.css'
-import { ChatToggle } from '@livekit/components-react';
 
 interface ControlPanelComponentProps {
     cameras: MediaDeviceInfo[];
@@ -34,7 +33,6 @@ const ControlPanelComponent: React.FC<ControlPanelComponentProps> = ({
         <button className="btn btn-danger" id="leave-room-button" onClick={leaveRoom}>
             방 나가기
         </button>
-        <ChatToggle></ChatToggle>
     </div>
 );
 
