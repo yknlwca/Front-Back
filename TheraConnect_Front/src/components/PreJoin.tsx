@@ -1,9 +1,12 @@
-// 입장 시 카메라 켜서 확인 할 수 있게 할까?
+
 import type {
     LocalAudioTrack, CreateLocalTracksOptions,
     LocalTrack, LocalVideoTrack
 } from 'livekit-client';
-import { createLocalAudioTrack, createLocalVideoTrack,    facingModeFromLocalTrack, createLocalTracks,Track, VideoPresets } from 'livekit-client';
+import {
+  createLocalAudioTrack, createLocalVideoTrack,
+  facingModeFromLocalTrack, createLocalTracks, Track, VideoPresets
+} from 'livekit-client';
 import * as React from 'react';
 import { MediaDeviceMenu } from '@/components/MediaDeviceMenu';
 import { useMediaDevices } from '@livekit/components-react';
@@ -13,6 +16,7 @@ import { RoomInfo } from './RoomInfo';
 import { defaultAudioSetting } from '@/lib/const';
 import { useCurState } from '@/lib/hooks/useCurState';
 import { useTranslation } from 'react-i18next';
+import { ParticipantPlaceholder } from '@livekit/components-react';
 
 /** @public */
 export type LocalUserChoices = {
@@ -216,10 +220,10 @@ export type LocalUserChoices = {
     onError,
     debug,
     roomName,
-    // joinLabel = 'Join Room',
-    // micLabel = 'Microphone',
-    // camLabel = 'Camera',
-    // userLabel = 'Username',
+    joinLabel = 'Join Room',
+    micLabel = 'Microphone',
+    camLabel = 'Camera',
+    userLabel = 'Username',
     showE2EEOptions = false,
     ...htmlProps
   }: PreJoinProps) {
@@ -341,31 +345,57 @@ export type LocalUserChoices = {
     }
   
     return (
-        <div   className=" flex flex-col items-center justify-center pt-10" {...htmlProps}>
-        <RoomInfo roomName={roomName} />
-        <div className=" divider my-2"></div>
-          <div className="bg-primary rounded-lg">
-            <div className=" audio flex">
+      <div className="lk-prejoin" {...htmlProps}>
+      <div className="lk-video-container">
+        {videoTrack && (
+          <video ref={videoEl} width="1280" height="720" data-lk-facing-mode={facingMode} />
+        )}
+        {(!videoTrack || !videoEnabled) && (
+          <div className="lk-camera-off-note">
+            <ParticipantPlaceholder />
+          </div>
+        )}
+      </div>
+      <div className="lk-button-group-container">
+        <div className="lk-button-group audio">
             <TrackToggle
-                className=' btn btn-primary'
-                style={{ color:"white"}}
-              initialState={audioEnabled}
-              source={Track.Source.Microphone}
-              onChange={(enabled) => setAudioEnabled(enabled)}
-            >
-              {t('mic')}
-            </TrackToggle>
-            <div className=" relative flex-shrink-0 btn bg-primary border-none hover:bg-opacity-50 p-0">
-              <MediaDeviceMenu
-                initialSelection={audioDeviceId}
-                kind="audioinput"
-                disabled={!audioTrack}
-                tracks={{ audioinput: audioTrack }}
-                onActiveDeviceChange={(_, id) => setAudioDeviceId(id)}
-              />
-            </div>
+              style={{color:"black"}}
+            initialState={audioEnabled}
+            source={Track.Source.Microphone}
+            onChange={(enabled) => setAudioEnabled(enabled)}
+          >
+            {t('mic')}
+          </TrackToggle>
+          <div className="lk-button-group-menu">
+            <MediaDeviceMenu
+              initialSelection={audioDeviceId}
+              kind="audioinput"
+              disabled={!audioTrack}
+              tracks={{ audioinput: audioTrack }}
+              onActiveDeviceChange={(_, id) => setAudioDeviceId(id)}
+            />
           </div>
         </div>
+        <div className="lk-button-group video">
+            <TrackToggle
+              style={{color:"black"}}
+            initialState={videoEnabled}
+            source={Track.Source.Camera}
+            onChange={(enabled) => setVideoEnabled(enabled)}
+          >
+            {t('camera')}
+          </TrackToggle>
+          <div className="lk-button-group-menu">
+            <MediaDeviceMenu
+              initialSelection={videoDeviceId}
+              kind="videoinput"
+              disabled={!videoTrack}
+              tracks={{ videoinput: videoTrack }}
+              onActiveDeviceChange={(_, id) => setVideoDeviceId(id)}
+            />
+          </div>
+        </div>
+      </div>
   
         <form className="flex flex-wrap justify-center mt-4 gap-2">
           <input

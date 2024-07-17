@@ -1,8 +1,8 @@
 import * as React from 'react';
 import type { Participant, TrackPublication } from 'livekit-client';
 import { Track } from 'livekit-client';
-import type { ParticipantClickEvent, TrackReferenceOrPlaceholder, isParticipantSourcePinned } from '@livekit/components-core';
-import { isTrackReference, isTrackReferencePinned, isLocal } from '@livekit/components-core';
+import type { ParticipantClickEvent, TrackReferenceOrPlaceholder } from '@livekit/components-core';
+import { isTrackReference, isTrackReferencePinned } from '@livekit/components-core';
 
 import {ParticipantPlaceholder} from '@/livekit-react-offical/assets/images'
 import { ScreenShareIcon } from '@/livekit-react-offical/assets/icons';
@@ -16,30 +16,20 @@ import { usePagination, ConnectionQualityIndicator, ParticipantName, TrackMutedI
     FocusToggle,
     usePinnedTracks,
     VideoTrack,
-    // AudioTrack,
     TrackRefContext,
     useFeatureContext,
     useMaybeTrackRefContext,
-    // AudioVisualizer,
     useTracks
 } from '@livekit/components-react';
 import { useIsEncrypted } from '@/livekit-react-offical/hooks/useIsEncrypted';
 import FullIcon from './Icons/FullIcon';
 import {AudioVisualizer} from "@/components/AudioComponent/AudioVisualizer"
-import {AudioTrack} from "@/components/AudioComponent/AudioTrack"
 import { VolumeMuteIndicator } from './AudioComponent/VolumeMuteIndicator';
 
-/**
- * The `ParticipantContextIfNeeded` component only creates a `ParticipantContext`
- * if there is no `ParticipantContext` already.
- * @example
- * ```tsx
- * <ParticipantContextIfNeeded participant={trackReference.participant}>
- *  ...
- * </ParticipantContextIfNeeded>
- * ```
- * @public
- */
+
+// The `ParticipantContextIfNeeded` component only creates a `ParticipantContext`
+//   if there is no `ParticipantContext` already.
+
 export function ParticipantContextIfNeeded(
   props: React.PropsWithChildren<{
     participant?: Participant;
@@ -196,7 +186,7 @@ export function ParticipantTile({
                     <AudioVisualizer/>
                 </>
               )}
-              {/* 只有播放视频时才显示头像 */}
+              { }
               {
                 // isTrackReference(trackReference) &&
                 (trackReference.publication?.kind === 'video' ||

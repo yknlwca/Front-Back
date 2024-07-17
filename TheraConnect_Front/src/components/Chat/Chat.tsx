@@ -32,6 +32,7 @@ export interface ChatProps extends React.HTMLAttributes<HTMLDivElement> {
     messageDecoder?: MessageDecoder;
   }
 
+
 /**
  * The Chat component adds a basis chat functionality to the LiveKit room. The messages are distributed to all participants
  * in the room. Only users who are in the room at the time of dispatch will receive the message.
@@ -100,7 +101,6 @@ export function Chat({ messageFormatter, messageDecoder, messageEncoder, ...prop
       }, [chatMessages, layoutContext?.widget]);
 
     // 👇add by cwy
-    // 表情相关
     const handleEmojiSelect = (emoji: any) => {
         if (inputRef.current) {
             const inp = inputRef.current
@@ -121,7 +121,6 @@ export function Chat({ messageFormatter, messageDecoder, messageEncoder, ...prop
             const inp = inputRef.current
             if (e.altKey && e.code == "Enter") {
                 e.preventDefault();
-                // 按下ALT+ENTER键，插入换行符
                 inp.value += "\r\n";;
                 inp.scrollTop = inp.scrollHeight;
                 
@@ -180,7 +179,7 @@ export function Chat({ messageFormatter, messageDecoder, messageEncoder, ...prop
                         }}
                 />
                 <div className='ml-1 col-span-2 text-end flex justify-around items-center'>
-                    {/* 发送图片被限制64kb，需要自定义发送接收消息接口，以后再说
+                    {/*
                     <div className=' bg-transparent rounded-[999px] hover:cursor-pointer hover:bg-white hover:bg-opacity-10  w-[36px] h-[36px] flex justify-center items-center'>
                         <input  type="file" id="fileSelect" name="file"/>
                         <svg  onClick={handleAdd} className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2628" width="28" height="28"><path d="M928 896H96c-53.02 0-96-42.98-96-96V224c0-53.02 42.98-96 96-96h832c53.02 0 96 42.98 96 96v576c0 53.02-42.98 96-96 96zM224 240c-61.856 0-112 50.144-112 112s50.144 112 112 112 112-50.144 112-112-50.144-112-112-112zM128 768h768V544l-175.03-175.03c-9.372-9.372-24.568-9.372-33.942 0L416 640l-111.03-111.03c-9.372-9.372-24.568-9.372-33.942 0L128 672v96z" p-id="2629" fill="#ffffff"></path></svg>

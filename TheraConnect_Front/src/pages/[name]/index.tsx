@@ -1,6 +1,6 @@
 import {
   LiveKitRoom,
-  //   PreJoin,
+    // PreJoin,
   //   LocalUserChoices,
   //   VideoConference,
   useToken,
@@ -14,7 +14,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DebugMode } from '../../lib/Debug';
-import { PreJoin, LocalUserChoices } from '@/components/PreJoin';
+import {  PreJoin,LocalUserChoices } from '@/components/PreJoin';
 import { useServerUrl } from '../../lib/client-utils';
 import { log } from '@livekit/components-core';
 import { defaultAudioSetting, publishDefaults } from '@/lib/const';

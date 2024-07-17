@@ -19,6 +19,7 @@ import CameraMicIcon from '../Icons/CameraMicIcon';
 import { useTranslation } from 'react-i18next';
 
 
+
 /** @public */
 export type ControlBarControls = {
   microphone?: boolean;
@@ -35,22 +36,6 @@ export interface ControlBarProps extends React.HTMLAttributes<HTMLDivElement> {
   controls?: ControlBarControls;
 }
 
-/**
- * The `ControlBar` prefab gives the user the basic user interface to control their
- * media devices (camera, microphone and screen share), open the `Chat` and leave the room.
- *
- * @remarks
- * This component is build with other LiveKit components like `TrackToggle`,
- * `DeviceSelectorButton`, `DisconnectButton` and `StartAudio`.
- *
- * @example
- * ```tsx
- * <LiveKitRoom>
- *   <ControlBar />
- * </LiveKitRoom>
- * ```
- * @public
- */
 export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const layoutContext = useMaybeLayoutContext();
