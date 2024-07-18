@@ -1,5 +1,6 @@
 package com.theraconnect.domain.member.entity;
 
+import com.theraconnect.domain.EMR.entity.EMR;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,4 +47,8 @@ public class Theraphist {
     @OneToMany(mappedBy = "theraphist", cascade = CascadeType.PERSIST, orphanRemoval = false)
     @Builder.Default
     private List<Patient> patients = new ArrayList<>();
+
+    @OneToMany(mappedBy = "theraphist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<EMR> emrs = new ArrayList<>();
 }

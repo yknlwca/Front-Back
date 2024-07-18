@@ -1,9 +1,8 @@
 package com.theraconnect.domain.EMR.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.theraconnect.domain.member.entity.Patient;
+import com.theraconnect.domain.member.entity.Theraphist;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +27,13 @@ public class EMR {
 
     private String comment;
 
-    private String treatPart;
+    private String bodyPart;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "theraphist_id", nullable = false)
+    private Theraphist theraphist;
 }

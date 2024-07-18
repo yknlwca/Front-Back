@@ -16,7 +16,7 @@ public class ExerciseVideo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ExerciseVideoId;
+    private Long exerciseVideoId;
 
     @ManyToOne
     @JoinColumn(name = "exercise_schedule_id")

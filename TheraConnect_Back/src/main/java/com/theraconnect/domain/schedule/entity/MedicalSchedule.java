@@ -2,10 +2,7 @@ package com.theraconnect.domain.schedule.entity;
 
 import com.theraconnect.domain.member.entity.Patient;
 import com.theraconnect.domain.member.entity.Theraphist;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +15,8 @@ import java.time.LocalDateTime;
 @Builder
 public class MedicalSchedule {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long medicalScheduleId;
 
     @ManyToOne

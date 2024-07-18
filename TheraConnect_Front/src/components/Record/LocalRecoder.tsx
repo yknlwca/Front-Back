@@ -6,6 +6,7 @@ export type LocalRecorderComponentProps = {
 type RecordConfig = {
     mic: boolean,
     speaker: boolean,
+    camera:boolean,
     screen: boolean,
     screenW: number | undefined,
     screenH: number | undefined,
@@ -18,6 +19,7 @@ const LocalRecorderComponent = React.memo(({recordingChange}: LocalRecorderCompo
     const [recordConfig, setRecordConfig] = useState<RecordConfig>({
         mic: false,
         speaker: false,
+        camera: false,
         screen: false,
         screenW: undefined,
         screenH: undefined,
@@ -135,6 +137,20 @@ const LocalRecorderComponent = React.memo(({recordingChange}: LocalRecorderCompo
                                     setRecordConfig({
                                         ...recordConfig,
                                         speaker: !recordConfig.speaker,
+                                    });
+                                }}
+                                className="checkbox checkbox-accent bg-white"
+                            />
+                        </label>
+                        <label className="cursor-pointer lavel">
+                            <span className="label-text">카메라 녹화</span>
+                            <input
+                                type="checkbox"
+                                checked={recordConfig.camera}
+                                onChange={() => {
+                                    setRecordConfig({
+                                        ...recordConfig,
+                                        camera: !recordConfig.camera
                                     });
                                 }}
                                 className="checkbox checkbox-accent bg-white"

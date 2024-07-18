@@ -1,12 +1,15 @@
 package com.theraconnect.domain.member.entity;
 
+import com.theraconnect.domain.EMR.entity.EMR;
 import com.theraconnect.domain.schedule.entity.ExerciseSchedule;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -60,7 +63,11 @@ public class Patient {
     @Column(nullable = false)
     private int userState;  // 0 OR 1
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exercise_schedule_id")
-    private ExerciseSchedule exerciseSchedule;
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ExerciseSchedule> exerciseSchedules = new ArrayList<>();
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<EMR> emrs = new ArrayList<>();
 }
