@@ -6,18 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExerciseVideoResponseDTO {
+public class GuideVideoResponseDTO {
 
-    private Long exerciseVideoId;
-    private String videoTitle;
+    private Long guideVideoId;
     private String videoPath;
-    private LocalDateTime uploadTime;
     private String thumbnailPath;
-    private Integer accuracy;
+    private LocalDateTime uploadTime;
+    private String title;
+    private String description;
+    private String warning;
+    private Set<String> categories;
+    private Integer level;
+    private Long therapistId;
+    private Long exercisePrescriptionId;
     private Long exerciseResultId;
 }

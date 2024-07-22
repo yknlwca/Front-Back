@@ -1,7 +1,7 @@
 package com.theraconnect.domain.member.entity;
 
 import com.theraconnect.domain.exercise.entity.ExerciseResult;
-import com.theraconnect.domain.schedule.entity.EMRbase;
+import com.theraconnect.domain.schedule.entity.EmrBase;
 import com.theraconnect.domain.schedule.entity.ExercisePrescription;
 import com.theraconnect.domain.schedule.entity.MedicalSchedule;
 import jakarta.persistence.*;
@@ -49,7 +49,7 @@ public class Patient {
     private String profileImagePath;
 
     @Enumerated(EnumType.STRING)
-    private UserStatus userState;
+    private UserStatus userStatus;
 
     // 환자 N 치료사 1
     @ManyToOne(fetch = FetchType.LAZY)
@@ -59,7 +59,7 @@ public class Patient {
     // 환자 1 : EMR N
     @OneToMany(mappedBy = "patient")
     @Builder.Default
-    private List<EMRbase> emRbases = new ArrayList<>();
+    private List<EmrBase> EMRBases = new ArrayList<>();
 
     // 환자 1 : 진료 일정 N
     @OneToMany(mappedBy = "patient")

@@ -1,7 +1,9 @@
 package com.theraconnect.domain.schedule.entity;
 
 import com.theraconnect.domain.member.entity.Patient;
+import com.theraconnect.domain.member.entity.Therapist;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class MedicalSchedule {
 
     @Id
@@ -37,10 +40,11 @@ public class MedicalSchedule {
     // 진료 일정 N : 치료사 1
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "therapist_id")
-    private com.TheraConnect.domain.member.entity.Therapist therapist;
+    private Therapist therapist;
 
     // 진료 일정 1 : EMR detail 1
     @OneToOne
     @JoinColumn(name = "emr_detail_id", nullable = false)
-    private EMRdetail emRdetail;
+    private EmrDetail emrDetail;
 }
+

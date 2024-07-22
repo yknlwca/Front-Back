@@ -5,15 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExerciseVideoRequestDTO {
+public class ExerciseResultRequestDTO {
 
-    private String videoTitle;
-    private String videoPath;
-    private String thumbnailPath;
-    private Integer accuracy;
-    private Long exerciseResultId;
+    private LocalDate exerciseDate;
+    private Long patientId;
 }

@@ -2,7 +2,7 @@ package com.theraconnect.domain.member.entity;
 
 
 import com.theraconnect.domain.exercise.entity.GuideVideo;
-import com.theraconnect.domain.schedule.entity.EMRbase;
+import com.theraconnect.domain.schedule.entity.EmrBase;
 import com.theraconnect.domain.schedule.entity.MedicalSchedule;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +35,7 @@ public class Therapist {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Integer age;
+    private LocalDate birthday;
 
     private Character gender;
 
@@ -44,9 +44,13 @@ public class Therapist {
     private String belong;
 
     @Enumerated(EnumType.STRING)
-    private UserStatus userState;
+    private UserStatus userStatus;
 
-    private Character workDay;
+    @ElementCollection(targetClass = WorkDay.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "therapist_work_days", joinColumns = @JoinColumn(name = "therapist_id"))
+    @Column(name = "work_day")
+    private List<WorkDay> workDays;
 
     private String career;
 
@@ -66,7 +70,7 @@ public class Therapist {
     // 치료사 1 : EMR base N
     @OneToMany(mappedBy = "therapist")
     @Builder.Default
-    private List<EMRbase> emRbases = new ArrayList<>();
+    private List<EmrBase> EMRBases = new ArrayList<>();
 
     // 치료사 1: Guide Video N
     @OneToMany(mappedBy = "therapist")

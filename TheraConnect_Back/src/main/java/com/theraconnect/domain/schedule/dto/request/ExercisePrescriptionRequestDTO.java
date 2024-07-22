@@ -5,20 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicalScheduleRequestDTO {
+public class ExercisePrescriptionRequestDTO {
 
-    private LocalDateTime reservationTime;
-    private String memo;
-    private String patientRequest;
-    private String reservationStatus;
-    private String roomNum;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Integer setCount;
     private Long patientId;
-    private Long therapistId;
     private Long EmrDetailId;
 }

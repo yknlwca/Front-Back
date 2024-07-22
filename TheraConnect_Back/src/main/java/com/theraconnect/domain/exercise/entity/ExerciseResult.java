@@ -3,6 +3,7 @@ package com.theraconnect.domain.exercise.entity;
 
 import com.theraconnect.domain.member.entity.Patient;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ExerciseResult {
 
     @Id
