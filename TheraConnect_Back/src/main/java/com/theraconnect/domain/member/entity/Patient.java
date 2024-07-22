@@ -1,73 +1,78 @@
 package com.theraconnect.domain.member.entity;
 
-import com.theraconnect.domain.EMR.entity.EMR;
-import com.theraconnect.domain.schedule.entity.ExerciseSchedule;
+import com.theraconnect.domain.exercise.entity.ExerciseResult;
+import com.theraconnect.domain.schedule.entity.EMRbase;
+import com.theraconnect.domain.schedule.entity.ExercisePrescription;
+import com.theraconnect.domain.schedule.entity.MedicalSchedule;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
-@Builder
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patientId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="theraphist_id", nullable = false)
-    private Theraphist theraphist;
-
-    @Column(nullable = false)
     private String loginId;
 
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String firstName;
+    private String name;
 
     @Column(nullable = false)
-    private String lastName;
+    private Character gender;
 
     @Column(nullable = false)
-    private Date birthDay;
+    private LocalDate birthday;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
+    @Column(nullable = false)
     private String phoneNumber;
 
-    private String provider;    // 연동된 소셜 사이트
+    private String provider;
 
     private String accountId;
 
-    // 필요 없을 수도
     private String profileImagePath;
 
-    private int height;
+    @Enumerated(EnumType.STRING)
+    private UserStatus userState;
 
-    private int weigt;
+    // 환자 N 치료사 1
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "therapist_id", nullable = false)
+    private Therapist therapist;
 
-    private String main_symtoms;
-
-    private String sugeryHistory;
-
-    @Column(nullable = false)
-    private int userState;  // 0 OR 1
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    // 환자 1 : EMR N
+    @OneToMany(mappedBy = "patient")
     @Builder.Default
-    private List<ExerciseSchedule> exerciseSchedules = new ArrayList<>();
+    private List<EMRbase> emRbases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    // 환자 1 : 진료 일정 N
+    @OneToMany(mappedBy = "patient")
     @Builder.Default
-    private List<EMR> emrs = new ArrayList<>();
+    private List<MedicalSchedule> medicalSchedules = new ArrayList<>();
+
+    // 환자 1 : 운동 처방 N
+    @OneToMany(mappedBy = "patient")
+    @Builder.Default
+    private List<ExercisePrescription> exercisePrescriptions = new ArrayList<>();
+
+    // 환자 1 : 운동 결과 N
+    @OneToMany(mappedBy = "patient")
+    @Builder.Default
+    private List<ExerciseResult> exerciseResults = new ArrayList<>();
 }

@@ -1,4 +1,4 @@
-package com.theraconnect.domain.video.dto.response;
+package com.theraconnect.domain.exercise.dto.response;
 
 import lombok.Data;
 
