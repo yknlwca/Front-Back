@@ -1,9 +1,7 @@
 package com.theraconnect.domain.schedule.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.theraconnect.domain.schedule.entity.ReservationStatus;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +14,7 @@ public class MedicalScheduleRequestDTO {
     private LocalDateTime reservationTime;
     private String memo;
     private String patientRequest;
-    private String reservationStatus;
+    private ReservationStatus reservationStatus;
     private String roomNum;
     private Long patientId;
     private Long therapistId;

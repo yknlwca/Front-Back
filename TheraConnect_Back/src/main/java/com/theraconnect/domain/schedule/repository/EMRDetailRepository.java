@@ -3,5 +3,6 @@ package com.theraconnect.domain.schedule.repository;
 import com.theraconnect.domain.schedule.entity.EmrDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EMRDetailRepository extends JpaRepository<EmrDetail, Long> {
+public interface EmrDetailRepository extends JpaRepository<EmrDetail, Long> {
+
 }

@@ -46,5 +46,18 @@ public class MedicalSchedule {
     @OneToOne
     @JoinColumn(name = "emr_detail_id", nullable = false)
     private EmrDetail emrDetail;
+
+    // 필요한 Setter만 추가
+    public void setReservationTime(LocalDateTime reservationTime) {
+        this.reservationTime = reservationTime;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
 }
 
